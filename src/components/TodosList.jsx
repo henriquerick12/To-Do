@@ -1,26 +1,21 @@
-import Todo from './Todo.jsx';
+import { useContext } from "react";
+import Todo from "./Todo.jsx";
+import { TodoContext } from "../context/TodoContext.jsx";
 
 function TodosList() {
-
+  const store = useContext(TodoContext);
   return (
     <>
-        <div className="todos">
-
-            <Todo
-              title="Do Groceries"
-              description="Buy apples, rice, juice and toilet paper."
-              isDone={true}
-            />
-
-            <Todo
-              title="Study React"
-              description="Understand context, reducers and state management with Redux."  
-              isDone={false}
-            />
-
-        </div>
+      <div className="todos">
+        {store.state.map((item) => (
+          <Todo
+            key={item.id}
+            data={item}
+          />
+        ))}
+      </div>
     </>
-  )
+  );
 }
 
-export default TodosList
+export default TodosList;
